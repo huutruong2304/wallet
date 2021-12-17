@@ -11,6 +11,30 @@ const DEFAULT_USER = {
 };
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({ ...DEFAULT_USER });
+  const [friendList, setFriendList] = useState([]);
+
+  const handleChangeCurrentUser = (event) => {
+    const keyName = event.target.name;
+    const keyValue = event.target.value;
+    setCurrentUser((prev) => ({
+      ...prev,
+      [keyName]: keyValue,
+    }));
+    console.log(event.target.name);
+  };
+
+  const handleAddFriend = (e) => {
+    e.preventDefault();
+    const newFriend = {
+      ...currentUser,
+      key: new Date().getTime(),
+    };
+    setFriendList((prev) => [...prev, newFriend]);
+    // Clear friend info added
+    setCurrentUser({ ...DEFAULT_USER });
+  };
+
   return (
     <div className="App">
       <Container>
@@ -20,15 +44,23 @@ function App() {
           </Row>
           <Form>
             <FormGroup>
-              <Input name="name" placeholder="Name" type="text" />
+              <Input name="name" placeholder="Name" type="text" onChange={handleChangeCurrentUser} value={currentUser.name} />
             </FormGroup>
             <FormGroup>
-              <Input name="walletAddress" placeholder="Wallet address" type="text" />
+              <Input
+                name="walletAddress"
+                placeholder="Wallet address"
+                type="text"
+                onChange={handleChangeCurrentUser}
+                value={currentUser.walletAddress}
+              />
             </FormGroup>
             <FormGroup>
-              <Input name="email" placeholder="Email" type="email" />
+              <Input name="email" placeholder="Email" type="email" onChange={handleChangeCurrentUser} value={currentUser.email} />
             </FormGroup>
-            <Button className="submit-btn">Submit</Button>
+            <Button className="submit-btn" onClick={handleAddFriend}>
+              Submit
+            </Button>
           </Form>
         </Container>
 
@@ -38,7 +70,9 @@ function App() {
           </Row>
           <Container>
             <Row>
-              <FriendCard />
+              {friendList.map((friend) => (
+                <FriendCard key={friend.id} {...friend} />
+              ))}
             </Row>
           </Container>
         </Container>
