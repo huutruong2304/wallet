@@ -1,0 +1,12 @@
+.friend-card {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+}
+.friend-card-feature {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}

@@ -1,23 +1,48 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Row } from 'reactstrap';
 import './App.css';
+import FriendCard from './components/FriendCard/FriendCard';
+
+const DEFAULT_USER = {
+  name: '',
+  walletAddress: '',
+  email: '',
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Container>
+          <Row>
+            <h2>Form</h2>
+          </Row>
+          <Form>
+            <FormGroup>
+              <Input name="name" placeholder="Name" type="text" />
+            </FormGroup>
+            <FormGroup>
+              <Input name="walletAddress" placeholder="Wallet address" type="text" />
+            </FormGroup>
+            <FormGroup>
+              <Input name="email" placeholder="Email" type="email" />
+            </FormGroup>
+            <Button className="submit-btn">Submit</Button>
+          </Form>
+        </Container>
+
+        <Container>
+          <Row>
+            <h2>Friends</h2>
+          </Row>
+          <Container>
+            <Row>
+              <FriendCard />
+            </Row>
+          </Container>
+        </Container>
+      </Container>
     </div>
   );
 }
