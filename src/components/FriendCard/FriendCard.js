@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../assets/css/FriendCard.css';
 import { Button, Col, Input, Row } from 'reactstrap';
-import { useState } from 'react/cjs/react.development';
 
 function FriendCard({ data, onDelete, onUpdate }) {
   const [isUpdating, setIsUpdating] = useState(false);
