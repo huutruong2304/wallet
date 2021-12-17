@@ -33,10 +33,15 @@ function App() {
     setFriendList((prev) => [...prev, newFriend]);
     // Clear friend info added
     setCurrentUser({ ...DEFAULT_USER });
+    console.log(friendList);
   };
 
   const handleRemoveFriend = (id) => {
     setFriendList((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleUpdateFriend = (newData) => {
+    setFriendList((prev) => prev.map((friend) => (friend.id === newData.id ? { ...newData } : friend)));
   };
 
   return (
@@ -75,7 +80,7 @@ function App() {
           <Container>
             <Row>
               {friendList.map((friend) => (
-                <FriendCard key={friend.id} {...friend} onDelete={() => handleRemoveFriend(friend.id)} />
+                <FriendCard key={friend.id} data={friend} onDelete={() => handleRemoveFriend(friend.id)} onUpdate={handleUpdateFriend} />
               ))}
             </Row>
           </Container>

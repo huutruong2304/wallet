@@ -10,3 +10,9 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.friend-card-text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
