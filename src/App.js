@@ -26,7 +26,7 @@ function App() {
 
   const initFriendListFromLocalStorage = () => {
     const friendListLocalStr = localStorage.getItem(FRIEND_LIST_KEY);
-    const friendListLocal = JSON.parse(friendListLocalStr);
+    const friendListLocal = JSON.parse(friendListLocalStr) || [];
     setFriendList(friendListLocal);
   };
 
