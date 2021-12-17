@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Row } from 'reactstrap';
 import './App.css';
 import FriendCard from './components/FriendCard/FriendCard';
@@ -10,9 +10,29 @@ const DEFAULT_USER = {
   email: '',
 };
 
+const FRIEND_LIST_KEY = 'FRIEND_LIST_KEY';
+
 function App() {
   const [currentUser, setCurrentUser] = useState({ ...DEFAULT_USER });
   const [friendList, setFriendList] = useState([]);
+
+  useEffect(() => {
+    initFriendListFromLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    saveFriendListToLocalStorage(friendList);
+  }, [friendList]);
+
+  const initFriendListFromLocalStorage = () => {
+    const friendListLocalStr = localStorage.getItem(FRIEND_LIST_KEY);
+    const friendListLocal = JSON.parse(friendListLocalStr);
+    setFriendList(friendListLocal);
+  };
+
+  const saveFriendListToLocalStorage = () => {
+    localStorage.setItem(FRIEND_LIST_KEY, JSON.stringify(friendList));
+  };
 
   const handleChangeCurrentUser = (event) => {
     const keyName = event.target.name;
