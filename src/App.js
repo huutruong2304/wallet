@@ -28,11 +28,15 @@ function App() {
     e.preventDefault();
     const newFriend = {
       ...currentUser,
-      key: new Date().getTime(),
+      id: new Date().getTime(),
     };
     setFriendList((prev) => [...prev, newFriend]);
     // Clear friend info added
     setCurrentUser({ ...DEFAULT_USER });
+  };
+
+  const handleRemoveFriend = (id) => {
+    setFriendList((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
@@ -71,7 +75,7 @@ function App() {
           <Container>
             <Row>
               {friendList.map((friend) => (
-                <FriendCard key={friend.id} {...friend} />
+                <FriendCard key={friend.id} {...friend} onDelete={() => handleRemoveFriend(friend.id)} />
               ))}
             </Row>
           </Container>
